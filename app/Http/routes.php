@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return 'hello';
-});
+Route::get('/', 'HomeController@index');
