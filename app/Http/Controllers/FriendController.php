@@ -17,4 +17,9 @@ class FriendController extends Controller
 			->with('friends', $friends)
 			->with('requests', $requests);
 	}
+
+	public function add($username)
+	{
+		
+	}
 }

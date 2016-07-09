@@ -16,7 +16,7 @@
 				</div>
 	
 				<div class="form-group{{ $errors->has('password') ? ' has-error' : ''}}">
-					<label for="password" class="control-label">Choose a password</label>
+					<label for="password" class="control-label">Your password</label>
 					<input type="password" name="password" class="form-control" id="password">
 					@if ($errors->has('password'))
 						<span class="help-block">{{ $errors->first('password') }}</span>

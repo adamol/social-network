@@ -19,6 +19,7 @@
 			@else
 				@foreach ($requests as $user)
 					@include('user/partials/userblock')
+					<a href="#" class="btn btn-primary">Accept friend request</a>
 				@endforeach
 			@endif
 		</div>
