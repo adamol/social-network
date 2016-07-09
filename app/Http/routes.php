@@ -33,4 +33,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/signout', [
 		'as'=> 'auth.signout', 'uses' => 'AuthController@signout'
 	]);
+
+	Route::get('/search', [
+		'as'=> 'search.results', 'uses' => 'SearchController@getResults'
+	]);
 });
