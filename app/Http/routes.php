@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', [
+	'as' => 'home', 'uses' => 'HomeController@index'
+]);
 Route::get('/alert', function() {
 	return Redirect::to('/')->with('info', 'Thanks for signing up!');
 });
+Route::get('/signup', [
+	'as' => 'auth.signup', 'uses' => 'AuthController@getSignup'
+]);
+Route::post('/signup', 'AuthController@postSignup');
