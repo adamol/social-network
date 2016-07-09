@@ -13,6 +13,9 @@
 Route::get('/', [
 	'as' => 'home', 'uses' => 'HomeController@index'
 ]);
+Route::get('/user/{username}', [
+	'as' => 'profile.index', 'uses' => 'ProfileController@index'
+]);
 
 
 Route::group(['middleware' => 'guest'], function() {
