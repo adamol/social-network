@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/alert', function() {
+	return Redirect::to('/')->with('info', 'Thanks for signing up!');
+});
