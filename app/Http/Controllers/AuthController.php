@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -29,5 +30,28 @@ class AuthController extends Controller
 		return redirect()
 			->route('home')
 			->with('info', 'Your account has been successfully created.');
+	}
+
+	public function getSignin()
+	{
+		return view('auth.signin');
+	}
+
+	public function postSignin(Request $request)
+	{
+		$this->validate($request, [
+			'email' => 'required',
+			'password' => 'required'
+		]);
+
+		if (!Auth::attempt($request->only(['email', 'password']), $request->has('remember'))) {
+			return redirect()
+			->back()
+			->with('info', 'Could not log you in with that information.');
+		}
+
+		return redirect()
+			->route('home')
+			->with('info', 'You were logged in successfully.');
 	}
 }

@@ -5,6 +5,7 @@
       <a class="navbar-brand" href="#">Acme</a>
     </div>
     <div class="collapse navbar-collapse">
+      @if (Auth::check())
       <ul class="nav navbar-nav">
         <li><a href="#">Timeline</a></li>
         <li><a href="#">Friends</a></li>
@@ -15,12 +16,16 @@
         </div>
         <button type="submit" class="btn btn-default">Search</button>
       </form>
+      @endif
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Durr</a></li>
+        @if (Auth::check())
+        <li><a href="#">{{ Auth::user()->getNameOrUsername() }}</a></li>
         <li><a href="#">Update profile</a></li>
         <li><a href="#">Sign out</a></li>
+        @else
         <li><a href="{{ route('auth.signup') }}">Sign up</a></li>
-        <li><a href="#">Sign in</a></li>
+        <li><a href="{{ route('auth.signin') }}">Sign in</a></li>
+        @endif
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->
