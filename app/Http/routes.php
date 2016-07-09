@@ -40,4 +40,9 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/search', [
 		'as'=> 'search.results', 'uses' => 'SearchController@getResults'
 	]);
+
+	Route::get('/profile/edit', [
+		'as'=> 'profile.edit', 'uses' => 'ProfileController@getEdit'
+	]);
+	Route::post('/profile/edit', 'ProfileController@postEdit');
 });
