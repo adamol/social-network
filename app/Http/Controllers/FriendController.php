@@ -28,6 +28,10 @@ class FriendController extends Controller
 				->with('info', 'No such user in database.');
 		}
 
+		if (Auth::user()->id === $user-id) {
+			return redirect()->route('home');
+		}
+
 		if (Auth::user()->hasFriendRequestPending($user)
 			|| $user->hasFriendRequestPending(Auth::user())) {
 			return redirect()
@@ -46,5 +50,26 @@ class FriendController extends Controller
 		return redirect()
 			->route('profile.index', ['username' => $user->username])
 			->with('info', 'Friend request sent.');
+	}
+
+	public function accept($username)
+	{
+		$user = User::where('username', $username)->first();
+
+		if (!$user) {
+			return redirect()
+				->route('home')
+				->with('info', 'No such user in database.');
+		}
+
+		if (!Auth::user()->hasReceivedFriendRequest($user)) {
+			return redirect()->route('home');
+		}
+
+		Auth::user()->acceptFriendRequest($user);
+
+		return redirect()
+				->route('profile.index', ['username' => Auth::user()->username])
+				->with('info', 'Successfully accepted friend request.');
 	}
 }
