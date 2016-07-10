@@ -57,4 +57,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/friends/accept/{username}', [
 		'as'=> 'friends.accept', 'uses' => 'FriendController@accept'
 	]);
+
+	Route::post('/status', [
+		'as' => 'status.post', 'uses' => 'StatusController@postStatus'
+	]);
 });

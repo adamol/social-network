@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Status;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -46,6 +47,11 @@ class User extends Authenticatable
     public function getAvatarUrl()
     {
         return "https://www.gravatar.com/avatar/{{ md5($this->email) }}?d=mm&s=40";
+    }
+
+    public function statuses()
+    {
+        return $this->hasMany(Status::class, 'user_id');
     }
 
     public function friendsOfMine()
