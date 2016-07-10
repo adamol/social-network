@@ -58,6 +58,10 @@ Route::group(['middleware' => 'auth'], function() {
 		'as'=> 'friends.accept', 'uses' => 'FriendController@accept'
 	]);
 
+	Route::post('/friends/delete/{username}', [
+		'as'=> 'friends.delete', 'uses' => 'FriendController@delete'
+	]);
+
 	Route::post('/status', [
 		'as' => 'status.post', 'uses' => 'StatusController@post'
 	]);
