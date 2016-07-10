@@ -59,6 +59,10 @@ Route::group(['middleware' => 'auth'], function() {
 	]);
 
 	Route::post('/status', [
-		'as' => 'status.post', 'uses' => 'StatusController@postStatus'
+		'as' => 'status.post', 'uses' => 'StatusController@post'
+	]);
+
+	Route::post('/status/{statusId}/reply', [
+		'as' => 'status.reply', 'uses' => 'StatusController@reply'
 	]);
 });
