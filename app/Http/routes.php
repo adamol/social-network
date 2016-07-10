@@ -65,4 +65,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/status/{statusId}/reply', [
 		'as' => 'status.reply', 'uses' => 'StatusController@reply'
 	]);
+
+	Route::get('/status/{statusId}/like', [
+		'as'=> 'status.like', 'uses' => 'StatusController@getLike'
+	]);
 });

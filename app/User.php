@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Like;
 use App\Status;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -54,6 +55,11 @@ class User extends Authenticatable
         return $this->hasMany(Status::class, 'user_id');
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'user_id');
+    }
+
     public function friendsOfMine()
     {
         return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
@@ -104,5 +110,14 @@ class User extends Authenticatable
     public function isFriendsWith(User $user)
     {
         return (bool) $this->friends()->where('id', $user->id)->count();
+    }
+
+    public function hasLikedStatus(Status $status)
+    {
+        return (bool) $status->likes
+            ->where('likeable_id', $status->id)
+            ->where('likeable_type', get_class($status))
+            ->where('user_id', $this->id)
+            ->count();
     }
 }

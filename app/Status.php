@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\Like;
 use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
@@ -23,5 +24,10 @@ class Status extends Model
 	public function replies()
 	{
 		return $this->hasMany(Status::class, 'parent_id');
+	}
+
+	public function likes()
+	{
+		return $this->morphMany(Like::class, 'likeable');
 	}
 }
